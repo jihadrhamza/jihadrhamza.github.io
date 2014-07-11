@@ -12,7 +12,6 @@
 		FB.login(function (response) {
 			if (response.authResponse) {
 				FB.api('/me/feed', 'post', {message: 'Hello, world!'});
-			};
 			} else {
 				alert("Login attempt failed!");
 			}
