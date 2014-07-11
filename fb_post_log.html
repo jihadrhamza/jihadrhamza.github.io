@@ -8,12 +8,16 @@
 
     <script>
     function postToFacebook() {
-        var body = 'Reading Connect JS documentation';
+        var body = 'Reading Connect JS documentation';		
 		FB.login(function (response) {
-			if (response.authResponse) {
-				FB.api('/me/feed', 'post', {message: 'Hello, world!'});
+			if (response.status === 'connected') {
+			//alert("Successfully connected to Facebook!");
+			FB.api('/me/feed', 'post', {message: 'Hello, world!'});
+			}
+			else if (response.status === 'not_authorized') {
+				alert("Login failed!");
 			} else {
-				alert("Login attempt failed!");
+				alert("Unknown error!");
 			}
 		}, { scope: 'email,user_photos,publish_actions' });
     }
