@@ -1,0 +1,48 @@
+ <!DOCTYPE html>
+    <html xmlns:fb="http://www.facebook.com/2008/fbml">
+    <head>
+    </head>
+    <body>
+
+    <a href="#" onClick="postToFacebook()">Post to Facebook</a>
+
+    <script>
+    function postToFacebook() {
+        var body = 'Reading Connect JS documentation';		
+		FB.login(function (response) {
+			//alert("response : "+response.status);
+			//console.log("response : "+response.status);
+			if (response.status === 'connected') {
+				//alert("Successfully connected to Facebook!");
+				FB.api('/me/feed', 'post', {message: 'Hello, world!'});
+			}
+			else if (response.status === 'not_authorized') {
+				alert("Login failed!");
+			} else {
+				alert("Unknown error!");
+			}
+		}, { scope: 'publish_actions' });
+    }
+    </script>
+
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId  : '262305713978331',
+          status : true, // check login status
+          cookie : true, // enable cookies to allow the server to access the session
+          xfbml  : false  // parse XFBML
+        });
+      };
+
+      (function() {
+        var e = document.createElement('script');
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
+
+    </body>
+    </html>
