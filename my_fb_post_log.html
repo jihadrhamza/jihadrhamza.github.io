@@ -14,7 +14,7 @@
 			//console.log("response : "+response.status);
 			if (response.status === 'connected') {
 				//alert("Successfully connected to Facebook!");
-				FB.api('/me/feed', 'post', {message: 'Hello, world!'},function(response) {
+				FB.api('/me/feed', 'post', {message: 'Hello, world!',name : 'Test Name',description : 'Test description'},function(response) {
 					console.log(response);
 				});
 			}
