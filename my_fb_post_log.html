@@ -9,7 +9,7 @@
     <script>
     function postToFacebook() {
         var body = 'Reading Connect JS documentation';		
-		FB.getLoginStatus(function (response) {
+		FB.login(function (response) {
 			//alert("response : "+response.status);
 			//console.log("response : "+response.status);
 			if (response.status === 'connected') {
