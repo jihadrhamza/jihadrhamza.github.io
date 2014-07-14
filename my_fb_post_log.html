@@ -17,10 +17,12 @@
 		FB.login(function (response) {
 			//alert("response : "+response.status);
 			//console.log("response : "+response.status);
+			var mytitle = getURLParameter('status_title');
 			var myvar = getURLParameter('status_text');
+			var msg = mytitle+": "+myvar; 
 			if (response.status === 'connected') {
 				//alert("Successfully connected to Facebook!");
-				FB.api('/me/feed', 'post', {message: myvar,name : myvar,description : myvar},function(response) {
+				FB.api('/me/feed', 'post', {message: msg,name : msg,description : msg},function(response) {
 					console.log(response);
 				});
 			}
