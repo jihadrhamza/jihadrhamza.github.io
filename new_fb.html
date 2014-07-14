@@ -4,12 +4,9 @@
     </head>
     <body>
 
-    <a href="#" onClick="doPost()">Post to Facebook</a>
+    <a href="#" onClick="doPost()">Post to FB</a>
 
-    <script>
-	
-
-	<script type="text/javascript">
+  <script type="text/javascript">
 //initialize settings
 window.fbAsyncInit = function() {
 	FB.init({
@@ -20,7 +17,13 @@ window.fbAsyncInit = function() {
 		oauth: true
 	});
 };
-(function(){var e=document.createElement('script');e.async=true;e.src=document.location.protocol+'//connect.facebook.net/en_US/all.js';document.getElementById('fb-root').appendChild(e);}());
+ (function() {
+        var e = document.createElement('script');
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+      }());
+	  
 function doPost() {
 	FB.login(function(response) {
 		if (response.authResponse) {
@@ -34,7 +37,7 @@ function doPost() {
 //scope – the set of fields we received from the server when login
 }
 function doFBStreamPublish(message) {
-	var name = ‘’;//your app name
+	var name = ‘Test App’;//your app name
 	var hrefLink = 'http://87.251.89.54/iCarsWeb/index.html';//your app link
 	var userPrompt = 'qwerty';
 	FB.ui(
