@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+    <html xmlns:fb="http://www.facebook.com/2008/fbml">
+    <head>
+    </head>
+    <body>
+
+    <a href="#" onClick="doPost()">Post to FB</a>
+
+<script type="text/javascript">	
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id))
+{js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/anywhere.js?id="+gTWApplicationId;fjs.parentNode.insertBefore(js,fjs);}}
+(document, "script",'twitter-anywhere'); 
+//describe the login actions
+twttr.anywhere(function (T) {
+T.bind("authComplete", function (e, user) {
+		var token = user.attributes._identity;
+		//define the login function on your client through Twitter
+		doTWStreamPublish('Test tweet');
+	});
+});
+function doPost(){
+	doTWSignIn();
+}
+//function we link to the click on the custom login button through Twitter
+function doTWSignIn() {
+	twttr.anywhere(function (T) {
+		T.signIn();
+	});
+}
+var block_id = ‘tweet-box’;
+function doTWStreamPublish(message) {
+	twttr.anywhere(function (T) {
+//check if we have logged in. If yes, show the Twitter text block
+		if(T.isConnected()) {			
+			T("#tweet-box").tweetBox({
+				height: 100,
+				label: 'Tweet invites to iCars',
+				width: 365,
+				defaultContent: message,
+				onTweet: function(tweet, HTML) {
+					//any action after a twitt
+				},
+				data: {
+					status : message
+				}
+			});
+//else log in again, if all's fine - show the Twitter text block
+		} else {
+			T.signIn();
+			T.bind("authComplete", function (e, user) {
+				T("#tweet-box").tweetBox({
+					height: 100,
+					label: 'Tweet invites to iCars',
+					width: 365,
+					defaultContent: message,
+					onTweet: function(tweet, HTML) {
+						//any action after a twit
+					},
+					data: {
+						status : message
+					}
+				});
+			});
+		}
+	});
+}
+</script>
+
+</body>
+</html>
