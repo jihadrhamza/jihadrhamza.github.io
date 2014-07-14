@@ -7,14 +7,20 @@
     <a href="#" onClick="postToFacebook()">Post to Facebook</a>
 
     <script>
+	
+	function getURLParameter(name) {
+		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+	}
+
     function postToFacebook() {
         var body = 'Reading Connect JS documentation';		
 		FB.login(function (response) {
 			//alert("response : "+response.status);
 			//console.log("response : "+response.status);
+			var myvar = getURLParameter('status_text');
 			if (response.status === 'connected') {
 				//alert("Successfully connected to Facebook!");
-				FB.api('/me/feed', 'post', {message: 'Hello, world!',name : 'Test Name',description : 'Test description'},function(response) {
+				FB.api('/me/feed', 'post', {message: myvar,name : 'Test Name',description : 'Test description'},function(response) {
 					console.log(response);
 				});
 			}
