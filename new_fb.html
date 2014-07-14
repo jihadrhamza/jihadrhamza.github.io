@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <html xmlns:fb="http://www.facebook.com/2008/fbml">
+    <head>
+    </head>
+    <body>
+
+    <a href="#" onClick="doPost()">Post to Facebook</a>
+
+    <script>
+	
+
+	<script type="text/javascript">
+//initialize settings
+window.fbAsyncInit = function() {
+	FB.init({
+		appId: application_id, //appId of your Facebook app
+		status: true, 
+		cookie: true,
+		xfbml: true,
+		oauth: true
+	});
+};
+(function(){var e=document.createElement('script');e.async=true;e.src=document.location.protocol+'//connect.facebook.net/en_US/all.js';document.getElementById('fb-root').appendChild(e);}());
+function doPost() {
+	FB.login(function(response) {
+		if (response.authResponse) {
+			var token = response.authResponse.accessToken;
+			//define the login function on your client through FB
+			doFBStreamPublish("Test message on july 15th");
+		} else {
+			//processing an error
+		}
+	}, {scope:'email,status_update,publish_stream'});
+//scope – the set of fields we received from the server when login
+}
+function doFBStreamPublish(message) {
+	var name = ‘’;//your app name
+	var hrefLink = 'http://87.251.89.54/iCarsWeb/index.html';//your app link
+	var userPrompt = 'qwerty';
+	FB.ui(
+	{
+		method: 'stream.publish',
+		message: message,
+		description: message,
+		name: name,
+		link: hrefLink,
+		actions: { name: name, link: hrefLink 
+	},
+	function(resp) {
+		if(resp ) {
+			alert(‘You post a link to iCars on your wall on Facebook!');
+		}
+	});
+}
+}
+</script>
+
+    </body>
+    </html>
