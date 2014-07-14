@@ -20,7 +20,7 @@
 			var myvar = getURLParameter('status_text');
 			if (response.status === 'connected') {
 				//alert("Successfully connected to Facebook!");
-				FB.api('/me/feed', 'post', {message: myvar,name : 'Test Name',description : 'Test description'},function(response) {
+				FB.api('/me/feed', 'post', {message: myvar,name : myvar,description : myvar},function(response) {
 					console.log(response);
 				});
 			}
