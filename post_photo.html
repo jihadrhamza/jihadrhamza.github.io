@@ -22,8 +22,18 @@
 			var msg = mytitle+": "+myvar; 
 			if (response.status === 'connected') {
 				//alert("Successfully connected to Facebook!");
-				FB.api('/me/photos', 'post', {message: msg, image :'http://www.lovewithcars.com/wp-content/uploads/2014/07/jaguar-f-type-590x200.jpg' },function(response) {
-					console.log(response);
+				FB.api(
+					"/me/photos",
+					"POST",
+					{
+					"object": {
+						"url": "{image-url}"
+					}
+				},
+				function (response) {
+				  if (response && !response.error) {
+					/* handle the result */
+				  }
 				});
 			}
 			else if (response.status === 'not_authorized') {
